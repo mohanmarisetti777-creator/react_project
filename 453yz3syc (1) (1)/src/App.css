@@ -1,0 +1,801 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap');
+
+/* ==========================================================================
+   Design Tokens & Modern Baseline
+   ========================================================================== */
+:root {
+  --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Palette */
+  --brand-50: #f0fdf4;
+  --brand-100: #dcfce7;
+  --brand-200: #bbf7d0;
+  --brand-500: #10b981;
+  --brand-600: #059669;
+  --brand-700: #047857;
+  --brand-900: #064e3b;
+  --brand-950: #022c22;
+
+  --surface-bg: #f8fafc;
+  --surface-card: #ffffff;
+  --surface-subtle: #f1f5f9;
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --border-card: rgba(226, 232, 240, 0.85);
+  --border-focus: var(--brand-500);
+
+  /* Elevation Shadows */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 12px 24px -4px rgba(15, 23, 42, 0.06), 0 4px 8px -2px rgba(15, 23, 42, 0.03);
+  --shadow-lg: 0 24px 48px -12px rgba(15, 23, 42, 0.09);
+  --shadow-glow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+
+  --transition-smooth: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--surface-bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: 
+    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.06) 0px, transparent 40%),
+    radial-gradient(at 0% 20%, rgba(14, 165, 233, 0.04) 0px, transparent 40%);
+  background-attachment: fixed;
+}
+
+/* ==========================================================================
+   Header Section (Professional Product Hero Banner)
+   ========================================================================== */
+.header {
+  background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #065f46 100%);
+  color: #ffffff;
+  padding: 64px 24px 80px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.25), transparent 50%);
+  pointer-events: none;
+}
+
+.header h1 {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  margin-bottom: 8px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #a7f3d0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: -0.01em;
+}
+
+.container {
+  width: 92%;
+  max-width: 1240px;
+  margin: -40px auto 80px;
+  position: relative;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   Registered Bar (Status & Quick Nav Action)
+   ========================================================================== */
+.registered-bar {
+  width: 100%;
+  padding: 16px 24px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: var(--transition-smooth);
+}
+
+.registered-bar::after {
+  content: '→';
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--brand-600);
+  transition: transform 0.2s ease;
+}
+
+.registered-bar:hover {
+  background: #ffffff;
+  border-color: var(--brand-200);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  color: var(--brand-700);
+}
+
+.registered-bar:hover::after {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   Search Box
+   ========================================================================== */
+.search-box {
+  background: var(--surface-card);
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-xs);
+  margin-bottom: 28px;
+  transition: var(--transition-smooth);
+}
+
+.search-box:focus-within {
+  border-color: var(--brand-500);
+  box-shadow: var(--shadow-glow);
+}
+
+.search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: transparent;
+}
+
+.search-box input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   Filter Buttons Segment
+   ========================================================================== */
+.filter-section {
+  margin-bottom: 36px;
+}
+
+.filter-section h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-buttons button {
+  padding: 8px 18px;
+  border: 1px solid var(--border-card);
+  background: var(--surface-card);
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-xs);
+  transition: var(--transition-smooth);
+}
+
+.filter-buttons button:hover {
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+  border-color: #cbd5e1;
+}
+
+.filter-buttons button:hover,
+.active-filter {
+  background: var(--brand-900) !important;
+  color: #ffffff !important;
+  border-color: var(--brand-900) !important;
+  box-shadow: 0 4px 12px rgba(6, 78, 59, 0.25);
+}
+
+/* ==========================================================================
+   Result Heading
+   ========================================================================== */
+.result-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.result-heading h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+.result-heading p {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Club Grid & Architecture Cards
+   ========================================================================== */
+.club-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.club-card {
+  background: var(--surface-card);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.club-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-500), transparent);
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.club-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: #cbd5e1;
+}
+
+.club-card:hover::before {
+  opacity: 1;
+}
+
+/* Card Icons */
+.club-icon,
+.details-icon,
+.registration-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, var(--brand-50), #ffffff);
+  border: 1px solid var(--brand-200);
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-xs);
+}
+
+.category {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 10px;
+  background: var(--brand-50);
+  color: var(--brand-700);
+  border: 1px solid var(--brand-200);
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.club-card h2 {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 14px 0 8px;
+  color: var(--text-primary);
+}
+
+.club-card p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.club-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 18px 0;
+  padding: 12px 14px;
+  background: var(--surface-subtle);
+  border-radius: var(--radius-xs);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Buttons (Enterprise Solid Style)
+   ========================================================================== */
+.details-btn,
+.join-btn,
+.register-btn {
+  border: none;
+  background: var(--brand-600);
+  color: #ffffff;
+  padding: 11px 20px;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  transition: var(--transition-smooth);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.details-btn {
+  width: 100%;
+}
+
+.details-btn:hover,
+.join-btn:hover,
+.register-btn:hover {
+  background: var(--brand-700);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(4, 120, 87, 0.25);
+}
+
+.details-btn:active,
+.join-btn:active,
+.register-btn:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Details Page Architecture
+   ========================================================================== */
+.details-page,
+.registration-page,
+.students-page {
+  max-width: 900px;
+  margin: auto;
+}
+
+.back-btn {
+  border: 1px solid var(--border-card);
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-xs);
+  box-shadow: var(--shadow-xs);
+  transition: var(--transition-smooth);
+}
+
+.back-btn:hover {
+  background: #ffffff;
+  color: var(--text-primary);
+  border-color: #cbd5e1;
+}
+
+.details-card {
+  background: var(--surface-card);
+  padding: 44px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-md);
+}
+
+.details-card h1 {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 16px 0;
+}
+
+.details-description {
+  color: var(--text-secondary);
+  font-size: 15.5px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.details-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.details-info div {
+  background: var(--surface-subtle);
+  padding: 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-card);
+  font-weight: 600;
+}
+
+.details-info p {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.activities {
+  list-style: none;
+  margin: 20px 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.activities li {
+  padding: 12px 16px;
+  background: var(--surface-subtle);
+  border-radius: var(--radius-xs);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--border-card);
+}
+
+.join-btn {
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   Registration Form View
+   ========================================================================== */
+.registration-card {
+  background: var(--surface-card);
+  max-width: 600px;
+  margin: auto;
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-md);
+}
+
+.registration-card h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 14px 0 6px;
+}
+
+.registration-card > p {
+  color: var(--text-muted);
+  font-size: 14.5px;
+  margin-bottom: 28px;
+}
+
+.registration-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.registration-card label {
+  margin: 14px 0 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.registration-card input,
+.registration-card select {
+  padding: 11px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-xs);
+  outline: none;
+  font-size: 14px;
+  background: #ffffff;
+  color: var(--text-primary);
+  transition: var(--transition-smooth);
+}
+
+.registration-card input:focus,
+.registration-card select:focus {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-glow);
+}
+
+.register-btn {
+  margin-top: 28px;
+}
+
+/* ==========================================================================
+   Success State Card
+   ========================================================================== */
+.success-card {
+  background: var(--surface-card);
+  padding: 56px 40px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-md);
+}
+
+.success-icon {
+  font-size: 54px;
+  margin-bottom: 16px;
+}
+
+.success-card h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.success-card h2 {
+  color: var(--brand-600);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 12px 0;
+}
+
+.success-card p {
+  color: var(--text-secondary);
+  font-size: 14.5px;
+  margin: 6px 0;
+}
+
+/* ==========================================================================
+   Students Roster / Data Table View
+   ========================================================================== */
+.students-header {
+  background: var(--surface-card);
+  padding: 24px 28px;
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-xs);
+}
+
+.students-header h1 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.students-header p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.student-search {
+  background: var(--surface-card);
+  padding: 12px 18px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  margin-bottom: 20px;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-xs);
+  transition: var(--transition-smooth);
+}
+
+.student-search:focus-within {
+  border-color: var(--brand-500);
+  box-shadow: var(--shadow-glow);
+}
+
+.student-search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+.students-table-container {
+  background: var(--surface-card);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-sm);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 850px;
+}
+
+th {
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background: #fcfcfd;
+}
+
+.club-tag {
+  display: inline-block;
+  background: var(--brand-50);
+  color: var(--brand-700);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--brand-200);
+}
+
+.delete-btn {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12.5px;
+  transition: var(--transition-smooth);
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2);
+}
+
+/* ==========================================================================
+   Empty States
+   ========================================================================== */
+.no-results,
+.empty-students {
+  background: var(--surface-card);
+  padding: 64px 24px;
+  text-align: center;
+  border-radius: var(--radius-md);
+  border: 1px dashed #cbd5e1;
+}
+
+.no-results div,
+.empty-students div {
+  font-size: 40px;
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.no-results p,
+.empty-students p {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 960px) {
+  .club-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 40px 20px 60px;
+  }
+
+  .header h1 {
+    font-size: 26px;
+  }
+
+  .container {
+    margin-top: -24px;
+  }
+
+  .club-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details-info {
+    grid-template-columns: 1fr;
+  }
+
+  .details-card,
+  .registration-card,
+  .success-card {
+    padding: 24px;
+  }
+
+  .result-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
